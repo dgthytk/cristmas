@@ -215,7 +215,8 @@ void setup() {
 ledMode = EEPROM.read(STARTMODE);
 // Location 0 is the starting mode.
 NUM_LEDS = EEPROM.read(STRANDLEN); 
-#if MAX_LEDS < 255
+if (EEPROM.read(STRANDLEN+1))
+NUM_LEDS = MAX_LEDS; // Need to ensure NUM_LEDS < MAX_LEDS elsewhere.
 if (EEPROM.read(STRANDLEN+1))
 NUM_LEDS = MAX_LEDS; // Need to ensure NUM_LEDS < MAX_LEDS elsewhere.
 #else
